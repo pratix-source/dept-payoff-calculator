@@ -1,0 +1,7 @@
+{
+  "application": "Pratix Borç Kapatma Hesaplayıcı",
+  "status_when_checked": "not_required",
+  "sources": [],
+  "reason_tr": "Araç kullanıcı tarafından girilen APR ve ödeme tutarlarıyla çalışır; otomatik oran verisi kullanılmaz.",
+  "reason_en": "This tool uses APR and payment amounts entered by the user; no external rate data is used."
+}
