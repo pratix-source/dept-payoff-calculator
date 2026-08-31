@@ -1,9 +1,6 @@
 {
-  "name": "pratix-debt-payoff-calculator",
-  "version": "1.0.0",
+  "name": "pratix-dept-payoff-calculator",
   "private": true,
-  "type": "module",
-  "scripts": {
-    "test": "node scripts/verify-repository.mjs tools/debt-payoff-calculator.html"
-  }
+  "version": "1.0.0",
+  "scripts": {"build": "node scripts/prerender.js", "test": "npm run build && node scripts/verify-prerender.js"}
 }
