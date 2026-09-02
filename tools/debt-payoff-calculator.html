@@ -1,5 +1,230 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Debt Payoff Calculator | Pratix.io</title><style>
 :root{--bg:#fafafa;--card:#fff;--text:#18181b;--muted:#71717a;--border:#e4e4e7;--blue:#2563eb;--indigo:#4f46e5;--green:#059669;--soft:#f4f4f5}body.dark{--bg:#09090b;--card:#18181b;--text:#fafafa;--muted:#a1a1aa;--border:#3f3f46;--soft:#27272a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--text)}.logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--indigo));display:grid;place-items:center;color:white;font-weight:800}.actions{display:flex;gap:10px;align-items:center}button,select,input{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:10px 12px}button{cursor:pointer;font-weight:700}.primary{background:linear-gradient(90deg,var(--blue),var(--indigo));color:white;border:0}.green{background:var(--green);color:white;border:0}.hero{text-align:center;max-width:900px;margin:0 auto;padding:58px 20px 36px}.pill{display:inline-flex;gap:8px;padding:7px 12px;border:1px solid color-mix(in srgb,var(--blue) 25%,var(--border));border-radius:999px;color:var(--blue);font-size:13px}.hero h1{font-size:clamp(34px,6vw,56px);margin:18px 0 12px}.hero p{color:var(--muted);font-size:18px}.badges{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.badge{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 14px;color:var(--muted)}main{max-width:1180px;margin:0 auto 50px;padding:0 20px}.grid{display:grid;grid-template-columns:1fr 2fr 1fr;gap:24px}.ad{height:380px;background:var(--soft);border:1px solid var(--border);border-radius:24px;display:grid;place-items:center;color:var(--muted);text-transform:uppercase;font-size:12px}.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:22px;margin-bottom:18px}.row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr auto;gap:10px;margin:14px 0;align-items:end}.debt-field{min-width:0}.debt-field label{display:block;margin:0 0 6px;color:var(--muted);font-size:12px;font-weight:700}.debt-field input{width:100%;min-width:0}.field-help{color:var(--muted);font-size:13px;line-height:1.5;margin:8px 0}.debt-remove{white-space:nowrap;height:42px}@media(max-width:900px){.debt-field label{font-size:11px}}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:var(--soft);border:1px solid var(--border);border-radius:18px;padding:16px;text-align:center}.stat b{font-size:22px}svg{width:100%;height:220px;background:var(--soft);border-radius:18px}.legal{max-width:820px;margin:22px auto}.footer{text-align:center;border-top:1px solid var(--border);padding:28px;color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid var(--border);padding:8px;text-align:left}@media(max-width:900px){.grid{grid-template-columns:1fr}.ad{display:none}.row{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr 1fr}nav{padding:14px}.actions{gap:6px}}
-@media(max-width:1100px){.grid{grid-template-columns:1fr}.ad{display:none}.row{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr 1fr}nav{padding:14px}.actions{gap:6px}}</style></head><body><nav><a class="brand" href="https://pratix.io"><div class="logo">P</div><div><b data-i18n="brand">Debt Payoff</b><div style="font-size:11px;color:var(--muted)"><span data-i18n="by">by</span> <b style="color:var(--blue)">Pratix.io</b></div></div></a><div class="actions"><button id="themeBtn" aria-label="Theme">🌙</button><select id="lang"><option value="en">🇬🇧 English</option><option value="tr">🇹🇷 Türkçe</option><option value="de">🇩🇪 Deutsch</option><option value="fr">🇫🇷 Français</option><option value="es">🇪🇸 Español</option><option value="it">🇮🇹 Italiano</option><option value="nl">🇳🇱 Nederlands</option><option value="sv">🇸🇪 Svenska</option><option value="da">🇩🇰 Dansk</option><option value="no">🇳🇴 Norsk</option><option value="fi">🇫🇮 Suomi</option><option value="zh">🇨🇳 中文</option></select></div></nav><header class="hero"><div class="pill">● <span data-i18n="badge1"></span></div><h1 data-i18n="heroTitle"></h1><p data-i18n="heroDesc"></p><div class="badges"><div class="badge" data-i18n="badge2"></div><div class="badge" data-i18n="badge3"></div><div class="badge" data-i18n="badge4"></div></div></header><main><div class="grid"><aside class="ad" data-i18n="ad"></aside><section><div class="card"><h3 data-i18n="methodTitle"></h3><select id="method"><option value="snowball" data-i18n="snowball"></option><option value="avalanche" data-i18n="avalanche"></option></select><label style="display:block;margin-top:14px" data-i18n="extraPayment"></label><input id="extra" type="number" value="150" min="0"></div><div class="card"><h3 data-i18n="debtsTitle"></h3><p class="field-help" data-i18n="debtEntryHelp"></p><div id="debts"></div><button id="add" data-i18n="addDebt"></button> <button class="primary" id="calc" data-i18n="calculate"></button></div><div class="card"><h3 data-i18n="summary"></h3><div class="summary"><div class="stat"><span data-i18n="months"></span><br><b id="m">0</b></div><div class="stat"><span data-i18n="totalInterest"></span><br><b id="int">0</b></div><div class="stat"><span data-i18n="totalPaid"></span><br><b id="paid">0</b></div><div class="stat"><span data-i18n="debtFree"></span><br><b id="date">-</b></div></div></div><div class="card"><h3 data-i18n="chartTitle"></h3><svg id="chart"></svg></div><div class="card"><h3 data-i18n="schedule"></h3><button class="green" id="csv" data-i18n="downloadCsv"></button> <button id="print" data-i18n="print"></button><div style="overflow:auto;margin-top:12px"><table><thead><tr><th>#</th><th data-i18n="balance"></th><th data-i18n="totalInterest"></th><th data-i18n="focus"></th></tr></thead><tbody id="tbody"></tbody></table></div></div></section><aside class="ad" data-i18n="ad"></aside></div><div class="card legal"><h3 data-i18n="legalTitle"></h3><p data-i18n="legalBody"></p></div></main><footer class="footer"><p data-i18n="footer"></p><a href="https://pratix.io">Pratix.io</a></footer><script>
+@media(max-width:1100px){.grid{grid-template-columns:1fr}.ad{display:none}.row{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr 1fr}nav{padding:14px}.actions{gap:6px}}</style><style id="pratix-standardization">
+/* Pratix.io shared visual language — visual-only overrides. */
+:root {
+  --pratix-blue: #2563eb;
+  --pratix-blue-dark: #1d4ed8;
+  --pratix-ink: #0f172a;
+  --pratix-muted: #64748b;
+  --pratix-bg: #f8fafc;
+  --pratix-surface: #ffffff;
+  --pratix-border: #e2e8f0;
+  --pratix-soft: #eff6ff;
+  --pratix-radius: 18px;
+  --pratix-radius-sm: 12px;
+  --pratix-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --pratix-shadow-lg: 0 16px 38px rgba(15, 23, 42, 0.08);
+}
+
+html { background: var(--pratix-bg); }
+
+body {
+  background-color: var(--pratix-bg) !important;
+  color: var(--pratix-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Shared navigation and brand treatment. */
+nav.sticky,
+nav.nav,
+header.sticky,
+header.nav,
+header.top {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: var(--pratix-border) !important;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+.brand,
+.brand-title,
+.brand-text,
+nav a:first-child,
+header a:first-child {
+  color: var(--pratix-ink);
+}
+
+.brand-mark,
+.brand-icon,
+header a:first-child > span:first-child,
+nav a:first-child > span:first-child {
+  border-radius: var(--pratix-radius-sm) !important;
+}
+
+nav select,
+header select,
+nav button,
+header button,
+.nav-actions .btn,
+.header-actions .btn {
+  border-radius: var(--pratix-radius-sm) !important;
+  border-color: var(--pratix-border) !important;
+}
+
+/* One button hierarchy across tools. */
+button,
+a.btn,
+.btn,
+button[class*="rounded-"],
+a[class*="rounded-"] {
+  border-radius: var(--pratix-radius-sm);
+}
+
+.btn-primary,
+button.primary,
+button[class*="bg-blue-600"],
+a[class*="bg-blue-600"] {
+  background: var(--pratix-blue) !important;
+  border-color: var(--pratix-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18);
+}
+
+.btn-primary:hover,
+button.primary:hover,
+button[class*="bg-blue-600"]:hover,
+a[class*="bg-blue-600"]:hover {
+  background: var(--pratix-blue-dark) !important;
+}
+
+.btn-secondary,
+.btn-ghost,
+button.secondary,
+button[class*="border-"],
+a[class*="border-"] {
+  border-color: var(--pratix-border) !important;
+}
+
+/* Consistent controls without touching checkboxes, radios, ranges or file inputs. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+select,
+textarea {
+  border-radius: var(--pratix-radius-sm) !important;
+  border-color: #cbd5e1 !important;
+  background-color: #fff !important;
+  color: var(--pratix-ink);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):focus,
+select:focus,
+textarea:focus {
+  border-color: var(--pratix-blue) !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+  outline: none !important;
+}
+
+/* Shared surface language for cards, forms, metrics and output panels. */
+.card,
+.panel,
+.form-card,
+.formCard,
+.results-card,
+.metric,
+.feature-card,
+section[class*="rounded-[2rem]"],
+section[class*="rounded-3xl"] {
+  border-color: var(--pratix-border) !important;
+  border-radius: var(--pratix-radius) !important;
+  box-shadow: var(--pratix-shadow);
+}
+
+/* Shared advertising placeholder treatment. */
+.ad,
+.ad-slot,
+.ad-placeholder,
+[class*="ad-placeholder"] {
+  border-color: #cbd5e1 !important;
+  border-radius: var(--pratix-radius) !important;
+  background-color: #f8fafc !important;
+  color: #64748b !important;
+}
+
+/* Remove decorative page-specific grids so tool pages share the main site's calm canvas. */
+.soft-grid,
+.bg-grid-pattern {
+  background-image: none !important;
+}
+
+/* Tables and lower-page content follow the same quiet surface rhythm. */
+table {
+  border-color: var(--pratix-border);
+}
+
+thead,
+th {
+  color: var(--pratix-ink);
+}
+
+tbody tr {
+  border-color: var(--pratix-border);
+}
+
+footer {
+  border-color: var(--pratix-border) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: var(--pratix-muted) !important;
+}
+
+/* Preserve existing dark-theme behavior while aligning its surfaces. */
+body.dark,
+body:has(nav.nav):not(.light) {
+  --pratix-bg: #0f172a;
+  --pratix-surface: #111827;
+  --pratix-border: #334155;
+  --pratix-ink: #e2e8f0;
+  --pratix-muted: #94a3b8;
+  background-color: var(--pratix-bg) !important;
+  color: var(--pratix-ink);
+}
+
+body.dark nav,
+body.dark header,
+body:has(nav.nav):not(.light) nav,
+body:has(nav.nav):not(.light) header {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border-color: var(--pratix-border) !important;
+}
+
+body.dark .card,
+body.dark .panel,
+body.dark .form-card,
+body.dark .formCard,
+body.dark .results-card,
+body.dark section[class*="rounded-[2rem]"],
+body.dark section[class*="rounded-3xl"],
+body:has(nav.nav):not(.light) .card,
+body:has(nav.nav):not(.light) .panel,
+body:has(nav.nav):not(.light) section[class*="rounded-[2rem]"],
+body:has(nav.nav):not(.light) section[class*="rounded-3xl"] {
+  background-color: var(--pratix-surface) !important;
+  border-color: var(--pratix-border) !important;
+  box-shadow: none;
+}
+
+body.dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+body.dark select,
+body.dark textarea,
+body:has(nav.nav):not(.light) input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+body:has(nav.nav):not(.light) select,
+body:has(nav.nav):not(.light) textarea {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #e2e8f0;
+}
+
+body.dark footer,
+body:has(nav.nav):not(.light) footer {
+  background: rgba(15, 23, 42, 0.86) !important;
+  color: var(--pratix-muted) !important;
+}
+
+@media (max-width: 720px) {
+  main { width: min(100% - 24px, 1180px); }
+  .hero-grid { gap: 24px !important; }
+}
+
+</style>
+</head><body><nav><a class="brand" href="https://pratix.io"><div class="logo">P</div><div><b data-i18n="brand">Debt Payoff</b><div style="font-size:11px;color:var(--muted)"><span data-i18n="by">by</span> <b style="color:var(--blue)">Pratix.io</b></div></div></a><div class="actions"><button id="themeBtn" aria-label="Theme">🌙</button><select id="lang"><option value="en">🇬🇧 English</option><option value="tr">🇹🇷 Türkçe</option><option value="de">🇩🇪 Deutsch</option><option value="fr">🇫🇷 Français</option><option value="es">🇪🇸 Español</option><option value="it">🇮🇹 Italiano</option><option value="nl">🇳🇱 Nederlands</option><option value="sv">🇸🇪 Svenska</option><option value="da">🇩🇰 Dansk</option><option value="no">🇳🇴 Norsk</option><option value="fi">🇫🇮 Suomi</option><option value="zh">🇨🇳 中文</option></select></div></nav><header class="hero"><div class="pill">● <span data-i18n="badge1"></span></div><h1 data-i18n="heroTitle"></h1><p data-i18n="heroDesc"></p><div class="badges"><div class="badge" data-i18n="badge2"></div><div class="badge" data-i18n="badge3"></div><div class="badge" data-i18n="badge4"></div></div></header><main><div class="grid"><aside class="ad" data-i18n="ad"></aside><section><div class="card"><h3 data-i18n="methodTitle"></h3><select id="method"><option value="snowball" data-i18n="snowball"></option><option value="avalanche" data-i18n="avalanche"></option></select><label style="display:block;margin-top:14px" data-i18n="extraPayment"></label><input id="extra" type="number" value="150" min="0"></div><div class="card"><h3 data-i18n="debtsTitle"></h3><p class="field-help" data-i18n="debtEntryHelp"></p><div id="debts"></div><button id="add" data-i18n="addDebt"></button> <button class="primary" id="calc" data-i18n="calculate"></button></div><div class="card"><h3 data-i18n="summary"></h3><div class="summary"><div class="stat"><span data-i18n="months"></span><br><b id="m">0</b></div><div class="stat"><span data-i18n="totalInterest"></span><br><b id="int">0</b></div><div class="stat"><span data-i18n="totalPaid"></span><br><b id="paid">0</b></div><div class="stat"><span data-i18n="debtFree"></span><br><b id="date">-</b></div></div></div><div class="card"><h3 data-i18n="chartTitle"></h3><svg id="chart"></svg></div><div class="card"><h3 data-i18n="schedule"></h3><button class="green" id="csv" data-i18n="downloadCsv"></button> <button id="print" data-i18n="print"></button><div style="overflow:auto;margin-top:12px"><table><thead><tr><th>#</th><th data-i18n="balance"></th><th data-i18n="totalInterest"></th><th data-i18n="focus"></th></tr></thead><tbody id="tbody"></tbody></table></div></div></section><aside class="ad" data-i18n="ad"></aside></div><div class="card legal"><h3 data-i18n="legalTitle"></h3><p data-i18n="legalBody"></p></div></main><footer class="footer"><p data-i18n="footer"></p><a href="https://pratix.io">Pratix.io</a></footer><script>
 const T={"en": {"brand": "Debt Payoff", "by": "by", "badge1": "Plan your debt-free date", "badge2": "Private client-side tool", "badge3": "Snowball & Avalanche", "badge4": "No data collection", "heroTitle": "Debt Payoff Calculator", "heroDesc": "Compare snowball and avalanche strategies, estimate payoff time, interest, and monthly progress.", "methodTitle": "Payoff Method", "snowball": "Snowball", "avalanche": "Avalanche", "extraPayment": "Extra Monthly Payment", "debtsTitle": "Debts", "addDebt": "Add Debt", "name": "Name", "balance": "Balance", "apr": "APR %", "minPayment": "Minimum Payment", "calculate": "Calculate", "summary": "Summary", "months": "Months", "totalInterest": "Total Interest", "totalPaid": "Total Paid", "debtFree": "Debt-free Date", "chartTitle": "Balance Over Time", "schedule": "Payment Schedule", "downloadCsv": "Download CSV", "print": "Print / PDF", "legalTitle": "Legal Notice", "legalBody": "This calculator is for general information only and is not financial, legal, tax, or professional advice. Verify results before making decisions.", "footer": "© 2026 Pratix.io. All tools run client-side securely. No data is collected or stored.", "ad": "Advertisement", "theme": "Theme", "language": "Language", "remove": "Remove", "focus": "Focus debt"}, "tr": {"brand": "Borç Ödeme", "by": "tarafından", "badge1": "Borçsuz kalma tarihinizi planlayın", "badge2": "Özel istemci tarafı araç", "badge3": "Kartopu ve Çığ", "badge4": "Veri toplama yok", "heroTitle": "Borç Kapatma Hesaplayıcı", "heroDesc": "Kartopu ve çığ stratejilerini karşılaştırın, ödeme süresini, faizi ve aylık ilerlemeyi tahmin edin.", "methodTitle": "Ödeme Yöntemi", "snowball": "Kartopu", "avalanche": "Çığ", "extraPayment": "Ek Aylık Ödeme", "debtsTitle": "Borçlar", "addDebt": "Borç Ekle", "name": "Ad", "balance": "Bakiye", "apr": "APR %", "minPayment": "Asgari Ödeme", "calculate": "Hesapla", "summary": "Özet", "months": "Ay", "totalInterest": "Toplam Faiz", "totalPaid": "Toplam Ödeme", "debtFree": "Borçsuz Tarih", "chartTitle": "Zaman İçinde Bakiye", "schedule": "Ödeme Planı", "downloadCsv": "CSV İndir", "print": "Yazdır / PDF", "legalTitle": "Yasal Uyarı", "legalBody": "Bu hesaplayıcı yalnızca genel bilgilendirme amaçlıdır; finansal, hukuki, vergi veya profesyonel tavsiye değildir. Karar almadan önce sonuçları doğrulayın.", "footer": "© 2026 Pratix.io. Tüm araçlar istemci tarafında güvenle çalışır. Veri toplanmaz veya saklanmaz.", "ad": "Reklam", "theme": "Tema", "language": "Dil", "remove": "Kaldır", "focus": "Odak borç"}, "de": {"brand": "Schuldenabbau", "by": "von", "badge1": "Planen Sie Ihr schuldenfreies Datum", "badge2": "Privates clientseitiges Tool", "badge3": "Schneeball & Lawine", "badge4": "Keine Datenerfassung", "heroTitle": "Schuldenabbau-Rechner", "heroDesc": "Vergleichen Sie Schneeball- und Lawinenstrategien und schätzen Sie Laufzeit, Zinsen und monatlichen Fortschritt.", "methodTitle": "Tilgungsmethode", "snowball": "Schneeball", "avalanche": "Lawine", "extraPayment": "Zusätzliche monatliche Zahlung", "debtsTitle": "Schulden", "addDebt": "Schuld hinzufügen", "name": "Name", "balance": "Saldo", "apr": "APR %", "minPayment": "Mindestzahlung", "calculate": "Berechnen", "summary": "Zusammenfassung", "months": "Monate", "totalInterest": "Gesamtzinsen", "totalPaid": "Gesamtzahlung", "debtFree": "Schuldenfrei am", "chartTitle": "Saldo im Zeitverlauf", "schedule": "Zahlungsplan", "downloadCsv": "CSV herunterladen", "print": "Drucken / PDF", "legalTitle": "Rechtlicher Hinweis", "legalBody": "Dieser Rechner dient nur allgemeinen Informationszwecken und ist keine Finanz-, Rechts-, Steuer- oder professionelle Beratung. Prüfen Sie Ergebnisse vor Entscheidungen.", "footer": "© 2026 Pratix.io. Alle Tools laufen sicher clientseitig. Es werden keine Daten gesammelt oder gespeichert.", "ad": "Werbung", "theme": "Thema", "language": "Sprache", "remove": "Entfernen", "focus": "Fokusschuld"}, "fr": {"brand": "Remboursement de dettes", "by": "par", "badge1": "Planifiez votre date sans dette", "badge2": "Outil privé côté client", "badge3": "Boule de neige & Avalanche", "badge4": "Aucune collecte de données", "heroTitle": "Calculateur de remboursement de dettes", "heroDesc": "Comparez les stratégies boule de neige et avalanche, estimez la durée, les intérêts et la progression mensuelle.", "methodTitle": "Méthode de remboursement", "snowball": "Boule de neige", "avalanche": "Avalanche", "extraPayment": "Paiement mensuel supplémentaire", "debtsTitle": "Dettes", "addDebt": "Ajouter une dette", "name": "Nom", "balance": "Solde", "apr": "TAEG %", "minPayment": "Paiement minimum", "calculate": "Calculer", "summary": "Résumé", "months": "Mois", "totalInterest": "Intérêts totaux", "totalPaid": "Total payé", "debtFree": "Date sans dette", "chartTitle": "Solde au fil du temps", "schedule": "Calendrier de paiement", "downloadCsv": "Télécharger CSV", "print": "Imprimer / PDF", "legalTitle": "Avis juridique", "legalBody": "Ce calculateur est fourni uniquement à titre informatif et ne constitue pas un conseil financier, juridique, fiscal ou professionnel. Vérifiez les résultats avant toute décision.", "footer": "© 2026 Pratix.io. Tous les outils fonctionnent côté client en toute sécurité. Aucune donnée n’est collectée ni stockée.", "ad": "Publicité", "theme": "Thème", "language": "Langue", "remove": "Supprimer", "focus": "Dette ciblée"}, "es": {"brand": "Pago de deudas", "by": "por", "badge1": "Planifique su fecha libre de deudas", "badge2": "Herramienta privada del cliente", "badge3": "Bola de nieve y avalancha", "badge4": "Sin recopilación de datos", "heroTitle": "Calculadora de pago de deudas", "heroDesc": "Compare estrategias de bola de nieve y avalancha, estime plazo, intereses y progreso mensual.", "methodTitle": "Método de pago", "snowball": "Bola de nieve", "avalanche": "Avalancha", "extraPayment": "Pago mensual adicional", "debtsTitle": "Deudas", "addDebt": "Añadir deuda", "name": "Nombre", "balance": "Saldo", "apr": "APR %", "minPayment": "Pago mínimo", "calculate": "Calcular", "summary": "Resumen", "months": "Meses", "totalInterest": "Interés total", "totalPaid": "Total pagado", "debtFree": "Fecha libre de deudas", "chartTitle": "Saldo en el tiempo", "schedule": "Calendario de pagos", "downloadCsv": "Descargar CSV", "print": "Imprimir / PDF", "legalTitle": "Aviso legal", "legalBody": "Esta calculadora es solo informativa y no constituye asesoramiento financiero, legal, fiscal o profesional. Verifique los resultados antes de decidir.", "footer": "© 2026 Pratix.io. Todas las herramientas se ejecutan de forma segura en el cliente. No se recopilan ni almacenan datos.", "ad": "Publicidad", "theme": "Tema", "language": "Idioma", "remove": "Eliminar", "focus": "Deuda objetivo"}, "it": {"brand": "Pagamento debiti", "by": "da", "badge1": "Pianifica la data senza debiti", "badge2": "Strumento privato lato client", "badge3": "Snowball e Avalanche", "badge4": "Nessuna raccolta dati", "heroTitle": "Calcolatore pagamento debiti", "heroDesc": "Confronta strategie snowball e avalanche, stima tempi, interessi e progresso mensile.", "methodTitle": "Metodo di rimborso", "snowball": "Snowball", "avalanche": "Avalanche", "extraPayment": "Pagamento mensile extra", "debtsTitle": "Debiti", "addDebt": "Aggiungi debito", "name": "Nome", "balance": "Saldo", "apr": "APR %", "minPayment": "Pagamento minimo", "calculate": "Calcola", "summary": "Riepilogo", "months": "Mesi", "totalInterest": "Interessi totali", "totalPaid": "Totale pagato", "debtFree": "Data senza debiti", "chartTitle": "Saldo nel tempo", "schedule": "Piano pagamenti", "downloadCsv": "Scarica CSV", "print": "Stampa / PDF", "legalTitle": "Avviso legale", "legalBody": "Questo calcolatore è solo informativo e non è consulenza finanziaria, legale, fiscale o professionale. Verifica i risultati prima di decidere.", "footer": "© 2026 Pratix.io. Tutti gli strumenti funzionano in sicurezza lato client. Nessun dato viene raccolto o archiviato.", "ad": "Pubblicità", "theme": "Tema", "language": "Lingua", "remove": "Rimuovi", "focus": "Debito focus"}, "nl": {"brand": "Schulden aflossen", "by": "door", "badge1": "Plan uw schuldenvrije datum", "badge2": "Privé client-side tool", "badge3": "Sneeuwbal & Lawine", "badge4": "Geen gegevensverzameling", "heroTitle": "Schuldenaflossingscalculator", "heroDesc": "Vergelijk sneeuwbal- en lawinestrategieën en schat looptijd, rente en maandelijkse voortgang.", "methodTitle": "Aflossingsmethode", "snowball": "Sneeuwbal", "avalanche": "Lawine", "extraPayment": "Extra maandelijkse betaling", "debtsTitle": "Schulden", "addDebt": "Schuld toevoegen", "name": "Naam", "balance": "Saldo", "apr": "APR %", "minPayment": "Minimumbetaling", "calculate": "Berekenen", "summary": "Samenvatting", "months": "Maanden", "totalInterest": "Totale rente", "totalPaid": "Totaal betaald", "debtFree": "Schuldenvrije datum", "chartTitle": "Saldo in de tijd", "schedule": "Betalingsschema", "downloadCsv": "CSV downloaden", "print": "Afdrukken / PDF", "legalTitle": "Juridische kennisgeving", "legalBody": "Deze calculator is alleen informatief en is geen financieel, juridisch, fiscaal of professioneel advies. Controleer resultaten voordat u beslissingen neemt.", "footer": "© 2026 Pratix.io. Alle tools draaien veilig client-side. Er worden geen gegevens verzameld of opgeslagen.", "ad": "Advertentie", "theme": "Thema", "language": "Taal", "remove": "Verwijderen", "focus": "Focusschuld"}, "sv": {"brand": "Skuldbetalning", "by": "av", "badge1": "Planera ditt skuldfria datum", "badge2": "Privat klientverktyg", "badge3": "Snöboll & Lavin", "badge4": "Ingen datainsamling", "heroTitle": "Skuldbetalningskalkylator", "heroDesc": "Jämför snöbolls- och lavinstrategier, uppskatta tid, ränta och månatlig utveckling.", "methodTitle": "Betalningsmetod", "snowball": "Snöboll", "avalanche": "Lavin", "extraPayment": "Extra månadsbetalning", "debtsTitle": "Skulder", "addDebt": "Lägg till skuld", "name": "Namn", "balance": "Saldo", "apr": "APR %", "minPayment": "Minsta betalning", "calculate": "Beräkna", "summary": "Sammanfattning", "months": "Månader", "totalInterest": "Total ränta", "totalPaid": "Totalt betalt", "debtFree": "Skuldfritt datum", "chartTitle": "Saldo över tid", "schedule": "Betalningsschema", "downloadCsv": "Ladda ner CSV", "print": "Skriv ut / PDF", "legalTitle": "Juridiskt meddelande", "legalBody": "Denna kalkylator är endast för allmän information och är inte finansiell, juridisk, skatte- eller professionell rådgivning. Verifiera resultat före beslut.", "footer": "© 2026 Pratix.io. Alla verktyg körs säkert på klientsidan. Ingen data samlas in eller lagras.", "ad": "Annons", "theme": "Tema", "language": "Språk", "remove": "Ta bort", "focus": "Fokusskuld"}, "da": {"brand": "Gældsafbetaling", "by": "af", "badge1": "Planlæg din gældfri dato", "badge2": "Privat klientsideværktøj", "badge3": "Snebold & Lavine", "badge4": "Ingen dataindsamling", "heroTitle": "Gældsafbetalingsberegner", "heroDesc": "Sammenlign snebold- og lavinestrategier, estimer tid, renter og månedlig fremgang.", "methodTitle": "Afbetalingsmetode", "snowball": "Snebold", "avalanche": "Lavine", "extraPayment": "Ekstra månedlig betaling", "debtsTitle": "Gæld", "addDebt": "Tilføj gæld", "name": "Navn", "balance": "Saldo", "apr": "APR %", "minPayment": "Minimumsbetaling", "calculate": "Beregn", "summary": "Oversigt", "months": "Måneder", "totalInterest": "Samlede renter", "totalPaid": "Samlet betalt", "debtFree": "Gældfri dato", "chartTitle": "Saldo over tid", "schedule": "Betalingsplan", "downloadCsv": "Download CSV", "print": "Udskriv / PDF", "legalTitle": "Juridisk meddelelse", "legalBody": "Denne beregner er kun til generel information og er ikke finansiel, juridisk, skattemæssig eller professionel rådgivning. Kontroller resultater før beslutninger.", "footer": "© 2026 Pratix.io. Alle værktøjer kører sikkert på klientsiden. Ingen data indsamles eller gemmes.", "ad": "Annonce", "theme": "Tema", "language": "Sprog", "remove": "Fjern", "focus": "Fokusgæld"}, "no": {"brand": "Gjeldsnedbetaling", "by": "av", "badge1": "Planlegg din gjeldfrie dato", "badge2": "Privat klientsideverktøy", "badge3": "Snøball & Skred", "badge4": "Ingen datainnsamling", "heroTitle": "Gjeldsnedbetalingskalkulator", "heroDesc": "Sammenlign snøball- og skredstrategier, estimer tid, renter og månedlig fremgang.", "methodTitle": "Nedbetalingsmetode", "snowball": "Snøball", "avalanche": "Skred", "extraPayment": "Ekstra månedlig betaling", "debtsTitle": "Gjeld", "addDebt": "Legg til gjeld", "name": "Navn", "balance": "Saldo", "apr": "APR %", "minPayment": "Minimumsbetaling", "calculate": "Beregn", "summary": "Sammendrag", "months": "Måneder", "totalInterest": "Total rente", "totalPaid": "Totalt betalt", "debtFree": "Gjeldfri dato", "chartTitle": "Saldo over tid", "schedule": "Betalingsplan", "downloadCsv": "Last ned CSV", "print": "Skriv ut / PDF", "legalTitle": "Juridisk merknad", "legalBody": "Denne kalkulatoren er kun til generell informasjon og er ikke finansiell, juridisk, skatte- eller profesjonell rådgivning. Kontroller resultater før beslutninger.", "footer": "© 2026 Pratix.io. Alle verktøy kjører sikkert på klientsiden. Ingen data samles inn eller lagres.", "ad": "Annonse", "theme": "Tema", "language": "Språk", "remove": "Fjern", "focus": "Fokusgjeld"}, "fi": {"brand": "Velanmaksu", "by": "tekijä", "badge1": "Suunnittele velaton päivämäärä", "badge2": "Yksityinen selainpohjainen työkalu", "badge3": "Lumipallo & Vyöry", "badge4": "Ei tiedonkeruuta", "heroTitle": "Velanmaksulaskuri", "heroDesc": "Vertaa lumipallo- ja vyörystrategioita, arvioi aika, korot ja kuukausittainen eteneminen.", "methodTitle": "Maksutapa", "snowball": "Lumipallo", "avalanche": "Vyöry", "extraPayment": "Ylimääräinen kuukausimaksu", "debtsTitle": "Velat", "addDebt": "Lisää velka", "name": "Nimi", "balance": "Saldo", "apr": "APR %", "minPayment": "Vähimmäismaksu", "calculate": "Laske", "summary": "Yhteenveto", "months": "Kuukaudet", "totalInterest": "Korot yhteensä", "totalPaid": "Maksettu yhteensä", "debtFree": "Velaton päivämäärä", "chartTitle": "Saldo ajan myötä", "schedule": "Maksuaikataulu", "downloadCsv": "Lataa CSV", "print": "Tulosta / PDF", "legalTitle": "Oikeudellinen huomautus", "legalBody": "Tämä laskuri on vain yleistä tietoa varten eikä ole taloudellista, oikeudellista, vero- tai ammatillista neuvontaa. Tarkista tulokset ennen päätöksiä.", "footer": "© 2026 Pratix.io. Kaikki työkalut toimivat turvallisesti selainpuolella. Tietoja ei kerätä eikä tallenneta.", "ad": "Mainos", "theme": "Teema", "language": "Kieli", "remove": "Poista", "focus": "Kohdevelka"}, "zh": {"brand": "债务偿还", "by": "由", "badge1": "规划您的无债日期", "badge2": "私密客户端工具", "badge3": "雪球法与雪崩法", "badge4": "不收集数据", "heroTitle": "债务偿还计算器", "heroDesc": "比较雪球法和雪崩法，估算还清时间、利息和每月进度。", "methodTitle": "还款方法", "snowball": "雪球法", "avalanche": "雪崩法", "extraPayment": "额外每月还款", "debtsTitle": "债务", "addDebt": "添加债务", "name": "名称", "balance": "余额", "apr": "年利率 %", "minPayment": "最低还款", "calculate": "计算", "summary": "摘要", "months": "月", "totalInterest": "总利息", "totalPaid": "总支付", "debtFree": "无债日期", "chartTitle": "余额随时间变化", "schedule": "还款计划", "downloadCsv": "下载 CSV", "print": "打印 / PDF", "legalTitle": "法律声明", "legalBody": "此计算器仅供一般信息参考，不构成财务、法律、税务或专业建议。请在做出决定前核实结果。", "footer": "© 2026 Pratix.io。所有工具均在客户端安全运行。不收集或存储任何数据。", "ad": "广告", "theme": "主题", "language": "语言", "remove": "删除", "focus": "重点债务"}};const EXTRA_I18N={en:{namePlaceholder:'e.g. Credit Card',balancePlaceholder:'e.g. 4500',aprPlaceholder:'e.g. 21 for 21%',minPaymentPlaceholder:'e.g. 120',debtEntryHelp:'Enter one debt per row. Use the remaining balance, the annual APR (21 means 21%), and the required minimum monthly payment. Use the same currency for every amount.'},tr:{namePlaceholder:'Örn. Kredi Kartı',balancePlaceholder:'Örn. 4500',aprPlaceholder:'Örn. %21 için 21',minPaymentPlaceholder:'Örn. 120',debtEntryHelp:'Her satıra bir borç girin. Kalan bakiyeyi, yıllık APR oranını (21 = %21) ve her ay ödenmesi gereken asgari tutarı yazın. Tüm tutarlarda aynı para birimini kullanın.'}};let lang=localStorage.lang||'en',schedule=[];function tr(k){return(T[lang]&&T[lang][k])||T.en[k]||(EXTRA_I18N[lang]&&EXTRA_I18N[lang][k])||EXTRA_I18N.en[k]||k}function apply(){document.documentElement.lang=lang;document.getElementById('lang').value=lang;document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=tr(e.dataset.i18n));document.querySelectorAll('[data-placeholder-key]').forEach(e=>e.placeholder=tr(e.dataset.placeholderKey));document.querySelectorAll('[data-aria-key]').forEach(e=>e.setAttribute('aria-label',tr(e.dataset.ariaKey)));document.querySelectorAll('.debt-remove').forEach(e=>e.textContent=tr('remove'));}function debtRow(d={name:'Card',balance:4500,apr:21,min:120}){const div=document.createElement('div');div.className='row';div.innerHTML=`<div class="debt-field"><label data-i18n="name"></label><input data-f="name" data-placeholder-key="namePlaceholder" data-aria-key="name" type="text"></div><div class="debt-field"><label data-i18n="balance"></label><input data-f="balance" data-placeholder-key="balancePlaceholder" data-aria-key="balance" type="number" min="0" step="0.01"></div><div class="debt-field"><label data-i18n="apr"></label><input data-f="apr" data-placeholder-key="aprPlaceholder" data-aria-key="apr" type="number" min="0" step="0.01"></div><div class="debt-field"><label data-i18n="minPayment"></label><input data-f="min" data-placeholder-key="minPaymentPlaceholder" data-aria-key="minPayment" type="number" min="0" step="0.01"></div><button class="debt-remove" type="button">${tr('remove')}</button>`;div.querySelector('[data-f=name]').value=d.name;div.querySelector('[data-f=balance]').value=d.balance;div.querySelector('[data-f=apr]').value=d.apr;div.querySelector('[data-f=min]').value=d.min;div.querySelector('button').setAttribute('aria-label',tr('remove'));div.querySelector('button').onclick=()=>{div.remove();calc()};return div}function getDebts(){return[...document.querySelectorAll('.row')].map(r=>({name:r.querySelector('[data-f=name]').value,balance:+r.querySelector('[data-f=balance]').value||0,apr:+r.querySelector('[data-f=apr]').value||0,min:+r.querySelector('[data-f=min]').value||0})).filter(d=>d.balance>0)}function fmt(n){return new Intl.NumberFormat(lang,{maximumFractionDigits:0}).format(n)}function calc(){let debts=getDebts(),extra=+document.getElementById('extra').value||0,method=document.getElementById('method').value,warning=document.getElementById('calcWarning');if(!warning){warning=document.createElement('p');warning.id='calcWarning';warning.style.color='#dc2626';document.getElementById('date').parentElement.appendChild(warning)}const invalid=!debts.length||extra<0||debts.some(d=>!Number.isFinite(d.apr)||d.apr<0||!Number.isFinite(d.min)||d.min<=0);if(invalid){schedule=[];document.getElementById('m').textContent='—';document.getElementById('int').textContent='—';document.getElementById('paid').textContent='—';document.getElementById('date').textContent='—';document.getElementById('tbody').innerHTML='';warning.textContent=lang==='tr'?'Her borç için negatif olmayan APR ve pozitif asgari ödeme girin.':'Enter a non-negative APR and a positive minimum payment for every debt.';draw([]);return}let month=0,totalInt=0,totalPaid=0,points=[],rows=[],MAX=1200;while(debts.some(d=>d.balance>.01)&&month<MAX){month++;let active=debts.filter(d=>d.balance>.01);active.sort((a,b)=>method==='snowball'?a.balance-b.balance:b.apr-a.apr);let pool=extra,focus=active[0].name;for(const d of debts){if(d.balance<=.01)continue;let interest=d.balance*d.apr/1200;d.balance+=interest;totalInt+=interest;let pay=Math.min(d.balance,d.min);d.balance-=pay;totalPaid+=pay;pool+=Math.max(0,d.min-pay)}for(const d of active){if(pool<=0)break;let pay=Math.min(d.balance,pool);d.balance-=pay;totalPaid+=pay;pool-=pay}let bal=debts.reduce((s,d)=>s+Math.max(0,d.balance),0);points.push(bal);rows.push([month,bal,totalInt,focus])}const complete=!debts.some(d=>d.balance>.01);schedule=rows;document.getElementById('m').textContent=complete?month:'>'+MAX;document.getElementById('int').textContent=fmt(totalInt);document.getElementById('paid').textContent=fmt(totalPaid);if(complete){let dt=new Date();dt.setMonth(dt.getMonth()+month);document.getElementById('date').textContent=dt.toLocaleDateString(lang);warning.textContent=''}else{document.getElementById('date').textContent='—';warning.textContent=lang==='tr'?'Bu ödeme planı borcu 100 yıl içinde kapatmıyor; asgari/ek ödemeyi ve APR bilgisini doğrulayın.':'This plan does not pay off the debt within 100 years; verify APR and increase the minimum or extra payment.'}document.getElementById('tbody').innerHTML=rows.slice(0,60).map(r=>`<tr><td>${r[0]}</td><td>${fmt(r[1])}</td><td>${fmt(r[2])}</td><td>${r[3]}</td></tr>`).join('');draw(points)}function draw(p){let svg=document.getElementById('chart'),w=800,h=220,max=Math.max(...p,1);let pts=p.map((v,i)=>`${i/(Math.max(p.length-1,1))*w},${h-(v/max)*(h-20)-10}`).join(' ');svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.innerHTML=`<polyline points="${pts}" fill="none" stroke="#2563eb" stroke-width="4"/><line x1="0" y1="${h-10}" x2="${w}" y2="${h-10}" stroke="#999"/>`}function csv(){let s='Month,Balance,Interest,Focus\n'+schedule.map(r=>r.join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/csv'}));a.download='debt-payoff-schedule.csv';a.click()}document.getElementById('lang').onchange=e=>{lang=e.target.value;localStorage.lang=lang;apply();document.querySelectorAll('.row button').forEach(b=>b.textContent=tr('remove'));calc()};document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.theme=document.body.classList.contains('dark')?'dark':'light';document.getElementById('themeBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙'};if(localStorage.theme==='dark'){document.body.classList.add('dark');document.getElementById('themeBtn').textContent='☀️'}document.getElementById('add').onclick=()=>{document.getElementById('debts').appendChild(debtRow({name:'Debt',balance:1000,apr:18,min:50}));apply()};document.getElementById('calc').onclick=calc;document.getElementById('csv').onclick=csv;document.getElementById('print').onclick=()=>print();['extra','method'].forEach(id=>document.getElementById(id).oninput=calc);document.getElementById('debts').append(debtRow({name:'Credit Card',balance:4500,apr:21,min:120}),debtRow({name:'Personal Loan',balance:8000,apr:11,min:220}),debtRow({name:'Store Card',balance:1200,apr:28,min:45}));apply();calc();
 </script><script src="../scripts/update-status-widget.js"></script><script type="application/json" id="pratix-update-status-fallback">{"application":"Pratix Borç Kapatma Hesaplayıcı","status":"not_required","checked_at":"2026-08-13T19:43:36.844Z","next_scheduled_check":"2026-09-13","sources":[],"message_tr":"Araç kullanıcı tarafından girilen APR ve ödeme tutarlarıyla çalışır; otomatik oran verisi kullanılmaz.","message_en":"This tool uses APR and payment amounts entered by the user; no external rate data is used.","rates_changed":false,"rates_preserved":true}</script></body></html>
